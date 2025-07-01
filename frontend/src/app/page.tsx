@@ -39,9 +39,8 @@ export default async function Home() {
               панелі.
             </p>
             <p>
-              Адмін панель доступна за адресою:{" "}
-              <a href="http://localhost:1337/admin" target="_blank">
-                http://localhost:1337/admin
+              <a href={`${process.env.NEXT_PUBLIC_STRAPI_URL}`} target="_blank">
+                Admin panel
               </a>
             </p>
           </div>
