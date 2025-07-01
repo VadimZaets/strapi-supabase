@@ -166,3 +166,72 @@ a.secondary {
     filter: invert();
   }
 }
+
+
+.postsContainer {
+  display: grid;
+  gap: 24px;
+  width: 100%;
+  max-width: 800px;
+  margin: 32px 0;
+}
+
+.postCard {
+  background: var(--gray-alpha-100);
+  border: 1px solid var(--gray-alpha-200);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.2s ease;
+}
+
+.postCard:hover {
+  background: var(--gray-alpha-200);
+  border-color: var(--gray-alpha-200);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.postCard h2 {
+  margin: 0 0 12px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.postCard p {
+  margin: 0 0 16px 0;
+  line-height: 1.6;
+  color: var(--foreground);
+  opacity: 0.8;
+}
+
+.postCard small {
+  color: var(--foreground);
+  opacity: 0.6;
+  font-size: 14px;
+}
+
+.noPosts {
+  text-align: center;
+  padding: 48px 24px;
+  background: var(--gray-alpha-100);
+  border-radius: 12px;
+  border: 1px solid var(--gray-alpha-200);
+  margin: 32px 0;
+}
+
+.noPosts p {
+  margin: 0 0 16px 0;
+  line-height: 1.6;
+}
+
+.noPosts a {
+  color: #0070f3;
+  text-decoration: underline;
+}
+
+@media (prefers-color-scheme: dark) {
+  .postCard:hover {
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  }
+}

@@ -1,7 +1,10 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import { getPosts, Post } from "@/lib/api";
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getPosts();
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -13,41 +16,58 @@ export default function Home() {
           height={38}
           priority
         />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+
+        <h1>Пости з Strapi</h1>
+
+        {posts.length > 0 ? (
+          <div className={styles.postsContainer}>
+            {posts.map((post: Post) => (
+              <article key={post.id} className={styles.postCard}>
+                <h2>{post.Title}</h2>
+                <p>{post.Desription}</p>
+                <small>
+                  Опубліковано:{" "}
+                  {new Date(post.publishedAt).toLocaleDateString("uk-UA")}
+                </small>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className={styles.noPosts}>
+            <p>
+              Постів поки що немає. Додайте пости в Strapi адміністративній
+              панелі.
+            </p>
+            <p>
+              Адмін панель доступна за адресою:{" "}
+              <a href="http://localhost:1337/admin" target="_blank">
+                http://localhost:1337/admin
+              </a>
+            </p>
+          </div>
+        )}
 
         <div className={styles.ctas}>
           <a
             className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+            href="http://localhost:1337/admin"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
+            Адмін панель Strapi
           </a>
-          <a
+          {/* <a
             href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.secondary}
           >
-            Read our docs
-          </a>
+            Документація Next.js
+          </a> */}
         </div>
       </main>
       <footer className={styles.footer}>
-        <a
+        {/* <a
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
@@ -59,7 +79,7 @@ export default function Home() {
             width={16}
             height={16}
           />
-          Learn
+          Навчання
         </a>
         <a
           href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
@@ -73,10 +93,10 @@ export default function Home() {
             width={16}
             height={16}
           />
-          Examples
+          Приклади
         </a>
         <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href="https://strapi.io/documentation"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -87,8 +107,8 @@ export default function Home() {
             width={16}
             height={16}
           />
-          Go to nextjs.org →
-        </a>
+          Документація Strapi →
+        </a> */}
       </footer>
     </div>
   );
