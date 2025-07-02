@@ -1,7 +1,7 @@
 export default () => ({
   upload: {
     config: {
-      provider: "supabase",
+      provider: "supabase-custom",
       providerOptions: {
         url: process.env.SUPABASE_URL,
         apiKey: process.env.SUPABASE_ANON_KEY,
