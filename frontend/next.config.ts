@@ -11,7 +11,12 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "**", // Для production Strapi серверів
+        hostname: "**.strapiapp.com", // Для prodaction Strapi на Strapi Cloud
+        pathname: "/uploads/**",
+      },
+      {
+        protocol: "https",
+        hostname: "**", // Для інших production серверів
       },
     ],
   },
