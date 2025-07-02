@@ -29,7 +29,7 @@ JWT_SECRET="your-jwt-secret"
 DATABASE_CLIENT=sqlite
 DATABASE_FILENAME=.tmp/data.db
 
-# Налаштування Supabase (опціонально)
+# Налаштування Supabase для бази даних (опціонально)
 # DATABASE_CLIENT=postgres
 # DATABASE_HOST=your-supabase-host
 # DATABASE_PORT=5432
@@ -37,6 +37,12 @@ DATABASE_FILENAME=.tmp/data.db
 # DATABASE_USERNAME=your-username
 # DATABASE_PASSWORD=your-password
 # DATABASE_SSL=true
+
+# Налаштування Supabase Storage для завантаження файлів
+SUPABASE_URL=https://your-project-id.supabase.co
+SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_BUCKET=uploads
+SUPABASE_DIRECTORY=strapi-uploads
 
 # Frontend URL для CORS
 FRONTEND_URL=http://localhost:3000
