@@ -2,18 +2,9 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import { getPosts, getHomePage, Post } from "@/lib/api";
 import BannerComponent from "./components/Banner";
-import EnvCheck from "./components/EnvCheck";
 
 export default async function Home() {
   const [posts, homePage] = await Promise.all([getPosts(), getHomePage()]);
-
-  // Debugging інформація
-  console.log("=== HOME PAGE DEBUG ===");
-  console.log("STRAPI_URL:", process.env.NEXT_PUBLIC_STRAPI_URL);
-  console.log("STRAPI_TOKEN exists:", !!process.env.NEXT_PUBLIC_STRAPI_TOKEN);
-  console.log("Home Page Data:", JSON.stringify(homePage, null, 2));
-  console.log("Posts Data:", JSON.stringify(posts, null, 2));
-  console.log("=== END DEBUG ===");
 
   return (
     <div className={styles.page}>
@@ -29,77 +20,9 @@ export default async function Home() {
 
         <h1>Пости з Strapi</h1>
 
-        {/* Перевірка змінних оточення */}
-        <EnvCheck />
-
-        {/* Debugging панель */}
-        <div
-          style={{
-            background: "#f5f5f5",
-            padding: "16px",
-            borderRadius: "8px",
-            marginBottom: "20px",
-            fontSize: "12px",
-            fontFamily: "monospace",
-          }}
-        >
-          <h3>🔍 Debug Info:</h3>
-          <p>
-            <strong>Strapi URL:</strong>{" "}
-            {process.env.NEXT_PUBLIC_STRAPI_URL || "НЕ ВСТАНОВЛЕНО"}
-          </p>
-          <p>
-            <strong>Token:</strong>{" "}
-            {process.env.NEXT_PUBLIC_STRAPI_TOKEN
-              ? "ВСТАНОВЛЕНО ✅"
-              : "НЕ ВСТАНОВЛЕНО ❌"}
-          </p>
-          <p>
-            <strong>Home Page:</strong>{" "}
-            {homePage ? `✅ ID: ${homePage.id}` : "❌ НЕ ЗАВАНТАЖЕНО"}
-          </p>
-          <p>
-            <strong>Банери:</strong>{" "}
-            {homePage?.banner?.length
-              ? `✅ Кількість: ${homePage.banner.length}`
-              : "❌ ВІДСУТНІ"}
-          </p>
-          <p>
-            <strong>Posts:</strong>{" "}
-            {posts?.length ? `✅ Кількість: ${posts.length}` : "❌ ВІДСУТНІ"}
-          </p>
-        </div>
-
         {/* Рендеримо банери з home-page */}
-        {homePage && homePage.banner && homePage.banner.length > 0 ? (
+        {homePage && homePage.banner && homePage.banner.length > 0 && (
           <BannerComponent banners={homePage.banner} />
-        ) : (
-          <div
-            style={{
-              background: "#fff3cd",
-              padding: "16px",
-              borderRadius: "8px",
-              marginBottom: "20px",
-              border: "1px solid #ffeaa7",
-            }}
-          >
-            <h3>⚠️ Банери не завантажені</h3>
-            <p>Можливі причини:</p>
-            <ul>
-              <li>Home Page не створена в Strapi CMS</li>
-              <li>Банери не додані до Home Page</li>
-              <li>Проблема з підключенням до API</li>
-              <li>Неправильні змінні оточення</li>
-            </ul>
-            {homePage ? (
-              <p>
-                Home Page знайдена, але банерів немає:{" "}
-                {JSON.stringify(homePage, null, 2)}
-              </p>
-            ) : (
-              <p>Home Page не знайдена в CMS</p>
-            )}
-          </div>
         )}
 
         {posts.length > 0 ? (

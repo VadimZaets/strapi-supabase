@@ -18,11 +18,13 @@ export default function BannerComponent({ banners }: BannerComponentProps) {
           {banner.backgroundImage && banner.backgroundImage.length > 0 && (
             <div className={styles.imageContainer}>
               <Image
-                src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${banner.backgroundImage[0].url}`}
+                // src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${banner.backgroundImage[0].url}`}
+                src={`${banner.backgroundImage[0].url}`}
                 alt={banner.backgroundImage[0].alternativeText || banner.Title}
                 width={banner.backgroundImage[0].width}
                 height={banner.backgroundImage[0].height}
                 className={styles.backgroundImage}
+                unoptimized={true}
                 priority
               />
             </div>
