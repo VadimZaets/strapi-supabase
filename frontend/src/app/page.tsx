@@ -38,18 +38,13 @@ export default async function Home() {
               Постів поки що немає. Додайте пости в Strapi адміністративній
               панелі.
             </p>
-            <p>
-              <a href={`${process.env.NEXT_PUBLIC_STRAPI_URL}`} target="_blank">
-                Admin panel
-              </a>
-            </p>
           </div>
         )}
 
         <div className={styles.ctas}>
           <a
             className={styles.primary}
-            href="http://localhost:1337/admin"
+            href={process.env.NEXT_PUBLIC_STRAPI_URL}
             target="_blank"
             rel="noopener noreferrer"
           >
