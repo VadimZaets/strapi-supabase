@@ -1,9 +1,10 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import { getPosts, Post } from "@/lib/api";
+import { getPosts, getHomePage, Post } from "@/lib/api";
+import BannerComponent from "./components/Banner";
 
 export default async function Home() {
-  const posts = await getPosts();
+  const [posts, homePage] = await Promise.all([getPosts(), getHomePage()]);
 
   return (
     <div className={styles.page}>
@@ -18,6 +19,11 @@ export default async function Home() {
         />
 
         <h1>Пости з Strapi</h1>
+
+        {/* Рендеримо банери з home-page */}
+        {homePage && homePage.banner && (
+          <BannerComponent banners={homePage.banner} />
+        )}
 
         {posts.length > 0 ? (
           <div className={styles.postsContainer}>
@@ -50,14 +56,9 @@ export default async function Home() {
           >
             Адмін панель Strapi
           </a>
-          {/* <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Документація Next.js
-          </a> */}
+          <a href="/articles" className={styles.secondary}>
+            Переглянути всі статті →
+          </a>
         </div>
       </main>
       <footer className={styles.footer}>
